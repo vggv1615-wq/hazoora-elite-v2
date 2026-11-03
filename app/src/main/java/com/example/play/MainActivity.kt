@@ -716,7 +716,6 @@ fun GameScreen(
 }
 
 @Composable
-@Composable
 fun BannerAd() {
     val context = LocalContext.current
 
