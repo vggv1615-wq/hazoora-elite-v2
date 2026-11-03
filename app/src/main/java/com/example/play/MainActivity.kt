@@ -11,6 +11,9 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.gms.ads.LoadAdError
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -119,6 +122,24 @@ fun PlayGame(context: Context) {
     var stageCompleted by rememberSaveable { mutableStateOf(false) }
     var rewardPoints by rememberSaveable { mutableIntStateOf(0) }
 var answerCount by rememberSaveable { mutableIntStateOf(0) }
+var interstitialAd: InterstitialAd? = null
+    LaunchedEffect(Unit) {
+    InterstitialAd.load(
+        context,
+        "ca-app-pub-1577551070712727/7942563959",
+        AdRequest.Builder().build(),
+        object : InterstitialAdLoadCallback() {
+
+            override fun onAdLoaded(ad: InterstitialAd) {
+                interstitialAd = ad
+            }
+
+            override fun onAdFailedToLoad(error: LoadAdError) {
+                interstitialAd = null
+            }
+        }
+    )
+}
     val allQuestions = remember { createAllQuestions() }
 
     val stageQuestions = remember(stage, restartKey) {
@@ -241,7 +262,7 @@ var answerCount by rememberSaveable { mutableIntStateOf(0) }
 answerCount++
 
 if (answerCount % 3 == 0) {
-    // ShowInterstitialAd()
+    interstitialAd?.show(this@MainActivity)
 }
                         if (isCorrect) {
                             correctCount++
