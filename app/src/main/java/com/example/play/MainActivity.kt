@@ -262,6 +262,12 @@ var interstitialAd: InterstitialAd? = null
 answerCount++
 
 if (answerCount % 3 == 0) {
+    interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+        override fun onAdDismissedFullScreenContent() {
+            interstitialAd = null
+        }
+    }
+
     interstitialAd?.show(context as ComponentActivity)
 }
                         if (isCorrect) {
