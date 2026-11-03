@@ -52,6 +52,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
+import androidx.compose.ui.platform.LocalContext
+import com.google.android.gms.ads.FullScreenContentCallback
 
 data class QuizQuestion(
     val question: String,
@@ -262,11 +264,15 @@ var interstitialAd: InterstitialAd? = null
 answerCount++
 
 if (answerCount % 3 == 0) {
-    interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
-        override fun onAdDismissedFullScreenContent() {
-            interstitialAd = null
+
+    interstitialAd?.fullScreenContentCallback =
+        object : FullScreenContentCallback() {
+
+            override fun onAdDismissedFullScreenContent() {
+                interstitialAd = null
+                loadInterstitialAd()
+            }
         }
-    }
 
     interstitialAd?.show(context as ComponentActivity)
 }
@@ -710,20 +716,23 @@ fun GameScreen(
 }
 
 @Composable
+@Composable
 fun BannerAd() {
+    val context = LocalContext.current
+
+    val adView = remember {
+        AdView(context).apply {
+            setAdSize(AdSize.BANNER)
+            adUnitId = "ca-app-pub-1577551070712727/9273946594"
+            loadAd(AdRequest.Builder().build())
+        }
+    }
+
     AndroidView(
         modifier = Modifier.fillMaxWidth(),
-        factory = { context ->
-            AdView(context).apply {
-                setAdSize(AdSize.BANNER)
-                adUnitId = "ca-app-pub-1577551070712727/9273946594"
-                loadAd(AdRequest.Builder().build())
-            }
-        }
+        factory = { adView }
     )
 }
-
-@Composable
 fun ResultScreen(
     stage: Int,
     score: Int,
