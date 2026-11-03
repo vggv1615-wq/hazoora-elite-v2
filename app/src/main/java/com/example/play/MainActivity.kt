@@ -267,8 +267,7 @@ val allQuestions = remember { createAllQuestions() }
                     muted = muted,
                     onAnswer = { answer, correctAnswer ->
                         val isCorrect = answer == correctAnswer
-answerCount++
-
+                        
 answerCount++
 
 if (answerCount % 3 == 0 && interstitialAd != null) {
