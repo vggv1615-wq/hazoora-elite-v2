@@ -9,7 +9,7 @@ workflows:
 
     scripts:
       - chmod +x gradlew
-      - ./gradlew bundleRelease
+      - ./gradlew assembleRelease
 
     artifacts:
-      - app/build/outputs/**/*.aab
+      - app/build/outputs/**/*.apk
