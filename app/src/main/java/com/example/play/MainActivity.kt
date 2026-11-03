@@ -269,7 +269,9 @@ val allQuestions = remember { createAllQuestions() }
                         val isCorrect = answer == correctAnswer
 answerCount++
 
-if (answerCount % 3 == 0) {
+answerCount++
+
+if (answerCount % 3 == 0 && interstitialAd != null) {
 
     interstitialAd?.fullScreenContentCallback =
         object : FullScreenContentCallback() {
@@ -280,7 +282,9 @@ if (answerCount % 3 == 0) {
             }
         }
 
-    interstitialAd?.show(context as ComponentActivity)
+    (context as? ComponentActivity)?.let {
+        interstitialAd?.show(it)
+    }
 }
                         if (isCorrect) {
                             correctCount++
