@@ -125,7 +125,8 @@ fun PlayGame(context: Context) {
     var rewardPoints by rememberSaveable { mutableIntStateOf(0) }
 var answerCount by rememberSaveable { mutableIntStateOf(0) }
 var interstitialAd: InterstitialAd? = null
-    LaunchedEffect(Unit) {
+
+fun loadInterstitialAd() {
     InterstitialAd.load(
         context,
         "ca-app-pub-1577551070712727/7942563959",
@@ -142,7 +143,12 @@ var interstitialAd: InterstitialAd? = null
         }
     )
 }
-    val allQuestions = remember { createAllQuestions() }
+
+LaunchedEffect(Unit) {
+    loadInterstitialAd()
+}
+
+val allQuestions = remember { createAllQuestions() }
 
     val stageQuestions = remember(stage, restartKey) {
         // نختار 10 أسئلة جديدة قدر الإمكان، مع ضمان ظهور سؤال علم
