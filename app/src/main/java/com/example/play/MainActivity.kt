@@ -118,7 +118,7 @@ fun PlayGame(context: Context) {
     var restartKey by rememberSaveable { mutableIntStateOf(0) }
     var stageCompleted by rememberSaveable { mutableStateOf(false) }
     var rewardPoints by rememberSaveable { mutableIntStateOf(0) }
-
+var answerCount by rememberSaveable { mutableIntStateOf(0) }
     val allQuestions = remember { createAllQuestions() }
 
     val stageQuestions = remember(stage, restartKey) {
@@ -238,7 +238,11 @@ fun PlayGame(context: Context) {
                     muted = muted,
                     onAnswer = { answer, correctAnswer ->
                         val isCorrect = answer == correctAnswer
+answerCount++
 
+if (answerCount % 3 == 0) {
+    // ShowInterstitialAd()
+}
                         if (isCorrect) {
                             correctCount++
                             score += 100
