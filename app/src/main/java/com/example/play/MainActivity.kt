@@ -301,7 +301,7 @@ if (answerCount % 3 == 0 && interstitialAd != null) {
                         } else {
                             completeStage()
                         }
-                    },
+                    }
                     onSkip = {
                         wrongCount++
                         hearts--
