@@ -262,7 +262,7 @@ var interstitialAd: InterstitialAd? = null
 answerCount++
 
 if (answerCount % 3 == 0) {
-    interstitialAd?.show(this@MainActivity)
+    interstitialAd?.show(context as ComponentActivity)
 }
                         if (isCorrect) {
                             correctCount++
