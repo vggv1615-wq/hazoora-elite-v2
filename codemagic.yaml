@@ -5,11 +5,11 @@ workflows:
 
     environment:
       vars:
-        PACKAGE_NAME: "com.example.play"
+        PACKAGE_NAME: "com.hazoora.quizgame"
 
     scripts:
       - chmod +x gradlew
-      - ./gradlew bundleRelease
+      - ./gradlew assembleRelease
 
     artifacts:
-      - app/build/outputs/**/*.aab
+      - app/build/outputs/**/*.apk
