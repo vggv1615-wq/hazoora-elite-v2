@@ -743,6 +743,7 @@ fun BannerAd() {
         factory = { adView }
     )
 }
+@Composable
 fun ResultScreen(
     stage: Int,
     score: Int,
