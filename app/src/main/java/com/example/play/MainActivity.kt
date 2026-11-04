@@ -285,8 +285,6 @@ val allQuestions = remember { createAllQuestions() }
 if (activity != null) {
     interstitialAd?.show(activity)
 } 
-                        }
-                    }
                         if (isCorrect) {
                             correctCount++
                             score += 100
