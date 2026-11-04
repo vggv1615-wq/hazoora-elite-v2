@@ -130,7 +130,7 @@ var interstitialAd by remember { mutableStateOf<InterstitialAd?>(null) }
 fun loadInterstitialAd() {
     InterstitialAd.load(
         context,
-        "ca-app-pub-3940256099942544/1033173712",
+        "ca-app-pub-1577551070712727/7942563959",
         AdRequest.Builder().build(),
         object : InterstitialAdLoadCallback() {
 
