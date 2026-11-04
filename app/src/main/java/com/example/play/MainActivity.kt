@@ -268,23 +268,23 @@ val allQuestions = remember { createAllQuestions() }
                     onAnswer = { answer, correctAnswer ->
                         val isCorrect = answer == correctAnswer
                         
-answerCount++
+                    answerCount++
 
-if (answerCount % 3 == 0 && interstitialAd != null) {
+                    if (answerCount % 3 == 0 && interstitialAd != null) {
 
-    interstitialAd?.fullScreenContentCallback =
-        object : FullScreenContentCallback() {
+                        interstitialAd?.fullScreenContentCallback =
+                            object : FullScreenContentCallback() {
 
-            override fun onAdDismissedFullScreenContent() {
-                interstitialAd = null
-                loadInterstitialAd()
-            }
-        }
+                                override fun onAdDismissedFullScreenContent() {
+                                    interstitialAd = null
+                                    loadInterstitialAd()
+                                }
+                            }
 
-    (context as? ComponentActivity)?.let {
-        interstitialAd?.show(it)
-    }
-}
+                        (context as? ComponentActivity)?.let {
+                            interstitialAd?.show(it)
+                        }
+                    }
                         if (isCorrect) {
                             correctCount++
                             score += 100
