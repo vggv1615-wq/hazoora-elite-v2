@@ -125,7 +125,7 @@ fun PlayGame(context: Context) {
     var stageCompleted by rememberSaveable { mutableStateOf(false) }
     var rewardPoints by rememberSaveable { mutableIntStateOf(0) }
 var answerCount by rememberSaveable { mutableIntStateOf(0) }
-var interstitialAd: InterstitialAd? = null
+var interstitialAd by remember { mutableStateOf<InterstitialAd?>(null) }
 
 fun loadInterstitialAd() {
     InterstitialAd.load(
@@ -136,6 +136,18 @@ fun loadInterstitialAd() {
 
             override fun onAdLoaded(ad: InterstitialAd) {
                 interstitialAd = ad
+                ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+
+    override fun onAdDismissedFullScreenContent() {
+        interstitialAd = null
+        loadInterstitialAd()
+    }
+
+    override fun onAdFailedToShowFullScreenContent(adError: com.google.android.gms.ads.AdError) {
+        interstitialAd = null
+        loadInterstitialAd()
+    }
+}
             }
 
             override fun onAdFailedToLoad(error: LoadAdError) {
@@ -203,6 +215,7 @@ val allQuestions = remember { createAllQuestions() }
         hearts = 3
         stageCompleted = false
         rewardPoints = 0
+        answerCount = 0
         restartKey++
     }
 
@@ -271,7 +284,7 @@ val allQuestions = remember { createAllQuestions() }
                         
                     answerCount++
 
-                    if (answerCount % 3 == 0 && interstitialAd != null) {
+                    if (answerCount > 0 && answerCount % 3 == 0 && interstitialAd != null) {
 
                         interstitialAd?.fullScreenContentCallback =
                             object : FullScreenContentCallback() {
@@ -280,6 +293,10 @@ val allQuestions = remember { createAllQuestions() }
                                     interstitialAd = null
                                     loadInterstitialAd()
                                 }
+                                override fun onAdFailedToShowFullScreenContent(adError: com.google.android.gms.ads.AdError) {
+    interstitialAd = null
+    loadInterstitialAd()
+}
                             }
 
                        val activity = context as? Activity
