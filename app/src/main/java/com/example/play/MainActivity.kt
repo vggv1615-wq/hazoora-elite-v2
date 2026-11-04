@@ -301,7 +301,7 @@ val allQuestions = remember { createAllQuestions() }
                         } else {
                             completeStage()
                         }
-                    }
+                    },
                     onSkip = {
                         wrongCount++
                         hearts--
