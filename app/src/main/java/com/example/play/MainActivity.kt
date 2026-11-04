@@ -281,8 +281,10 @@ val allQuestions = remember { createAllQuestions() }
                                 }
                             }
 
-                        (context as? ComponentActivity)?.let {
-                            interstitialAd?.show(it)
+                       val activity = context as? Activity
+if (activity != null) {
+    interstitialAd?.show(activity)
+} 
                         }
                     }
                         if (isCorrect) {
