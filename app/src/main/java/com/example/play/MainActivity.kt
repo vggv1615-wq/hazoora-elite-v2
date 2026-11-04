@@ -1,6 +1,7 @@
 package com.hazoora.quizgame
 
 import android.content.Context
+import android.app.Activity
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.ToneGenerator
