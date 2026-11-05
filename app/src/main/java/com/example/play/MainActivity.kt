@@ -56,6 +56,8 @@ import kotlinx.coroutines.delay
 import androidx.compose.ui.platform.LocalContext
 import com.google.android.gms.ads.FullScreenContentCallback
 
+private var bannerAdView: AdView? = null
+
 data class QuizQuestion(
     val question: String,
     val correct: String,
@@ -317,6 +319,10 @@ if (activity != null) {
                             screen = "result"
                         } else if (questionIndex < stageQuestions.lastIndex) {
                             questionIndex++
+
+if (questionIndex % 2 == 0) {
+    bannerAdView?.loadAd(AdRequest.Builder().build())
+}
                         } else {
                             completeStage()
                         }
@@ -330,6 +336,10 @@ if (activity != null) {
                             screen = "result"
                         } else if (questionIndex < stageQuestions.lastIndex) {
                             questionIndex++
+
+if (questionIndex % 2 == 0) {
+    bannerAdView?.loadAd(AdRequest.Builder().build())
+}
                         } else {
                             completeStage()
                         }
@@ -752,6 +762,7 @@ fun BannerAd() {
             setAdSize(AdSize.BANNER)
             adUnitId = "ca-app-pub-1577551070712727/9273946594"
             loadAd(AdRequest.Builder().build())
+            bannerAdView = this
         }
     }
 
