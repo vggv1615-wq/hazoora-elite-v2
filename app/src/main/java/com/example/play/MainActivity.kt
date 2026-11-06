@@ -9,6 +9,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
@@ -75,6 +76,13 @@ data class QuizQuestion(
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        val requestConfiguration = RequestConfiguration.Builder()
+    .setMaxAdContentRating(RequestConfiguration.MAX_AD_CONTENT_RATING_G)
+    .build()
+
+MobileAds.setRequestConfiguration(requestConfiguration)
+        
         MobileAds.initialize(this) {}
 
         setContent {
@@ -320,9 +328,7 @@ if (activity != null) {
                         } else if (questionIndex < stageQuestions.lastIndex) {
                             questionIndex++
 
-if (questionIndex % 2 == 0) {
-    bannerAdView?.loadAd(AdRequest.Builder().build())
-}
+
                         } else {
                             completeStage()
                         }
@@ -337,9 +343,6 @@ if (questionIndex % 2 == 0) {
                         } else if (questionIndex < stageQuestions.lastIndex) {
                             questionIndex++
 
-if (questionIndex % 2 == 0) {
-    bannerAdView?.loadAd(AdRequest.Builder().build())
-}
                         } else {
                             completeStage()
                         }
