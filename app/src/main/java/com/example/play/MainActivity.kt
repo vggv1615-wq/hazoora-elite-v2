@@ -751,8 +751,9 @@ fun GameScreen(
             )
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
-        BannerAd()
+        Spacer(modifier = Modifier.weight(1f))
+
+BannerAd()
     }
 }
 
