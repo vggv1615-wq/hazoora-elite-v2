@@ -763,7 +763,7 @@ fun BannerAd() {
     val adView = remember {
         AdView(context).apply {
             setAdSize(AdSize.BANNER)
-            adUnitId = "ca-app-pub-3940256099942544/6300978111"
+            adUnitId = "ca-app-pub-1577551070712727/9273946594"
             post {
     loadAd(AdRequest.Builder().build())
             }
