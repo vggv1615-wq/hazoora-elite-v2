@@ -764,7 +764,9 @@ fun BannerAd() {
         AdView(context).apply {
             setAdSize(AdSize.BANNER)
             adUnitId = "ca-app-pub-1577551070712727/9273946594"
-            loadAd(AdRequest.Builder().build())
+            post {
+    loadAd(AdRequest.Builder().build())
+            }
             bannerAdView = this
         }
     }
